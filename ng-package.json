@@ -1,0 +1,27 @@
+{
+    "$schema": "./node_modules/ng-packagr/ng-package.schema.json",
+    "dest": "./dist",
+    "lib": {
+        "entryFile": "src/public-api.ts"
+    },
+    "allowedNonPeerDependencies": [
+        "@fortawesome/angular-fontawesome",
+        "@fortawesome/fontawesome-svg-core",
+        "@fortawesome/free-brands-svg-icons",
+        "@fortawesome/free-regular-svg-icons",
+        "@fortawesome/free-solid-svg-icons",
+        "@interactjs/types",
+        "@join/core",
+        "@ng-bootstrap/ng-bootstrap",
+        "bootstrap",
+        "interactjs",
+        "ngx-bootstrap",
+        "ngx-toastr",
+        "jwt-decode",
+        "tslib",
+        "uuid"
+    ],
+    "assets": [
+        "src/lib/assets"
+    ]
+}

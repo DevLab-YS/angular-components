@@ -1,0 +1,18 @@
+@if (config) {
+    <div class="tw-font-sans tw-w-full tw-h-[50px] tw-overflow-hidden tw-bg-background-secondary tw-text-text-primary">
+        <div class="tw-flex tw-justify-between tw-mx-auto tw-py-1 tw-px-4">
+            <!-- left actions -->
+            <div class="tw-flex">
+                @for (action of config.leftActions; track $index) {
+                    <ys-header-action [config]="config" [action]="action"></ys-header-action>
+                }
+            </div>
+            <!-- right actions -->
+            <div class="tw-flex">
+                @for (action of config.rightActions; track $index) {
+                    <ys-header-action [config]="config" [action]="action"></ys-header-action>
+                }
+            </div>
+        </div>
+    </div>
+}

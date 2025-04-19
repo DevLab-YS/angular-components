@@ -1,0 +1,19 @@
+@if (config && action) {
+    <button
+        type="button"
+        [class]="getTypeClasses()"
+        (click)="clickAction(action)"
+        [ngbTooltip]="config.prefix + '.' + action.key + '.tooltip' | translate"
+        [disableTooltip]="!action.showTooltip"
+    >
+        @if (action.icon) {
+            <fa-icon size="lg" [icon]="action.icon"></fa-icon>
+        }
+        @if (action.icon && action.showLabel) {
+            <span class="tw-mr-4"></span>
+        }
+        @if (action.showLabel) {
+            <span>{{ config.prefix + '.' + action.key + '.label' | translate }}</span>
+        }
+    </button>
+}
