@@ -30,7 +30,7 @@ jobs:
 
             - name: Get version from package.json
               id: get_version
-              run: echo "VERSION=$(node -p 'require(\"./package.json\").version')" >> $GITHUB_ENV
+              run: echo "VERSION=$(node -p 'require('./package.json').version')" >> $GITHUB_ENV
 
             - name: Check if tag already exists
               run: |
@@ -52,4 +52,4 @@ jobs:
                   git config user.name "github-actions[bot]"
                   git config user.email "github-actions[bot]@users.noreply.github.com"
                   git tag v${{ env.VERSION }}
-                  git push https://github-actions:${{ secrets.GH_TOKEN }}@github.com/YIRMELSANCHEZ/angular-components.git ${{ env.VERSION }}
+                  git push https://github-actions:${{ secrets.NODE_AUTH_TOKEN }}@github.com/YIRMELSANCHEZ/angular-components.git ${{ env.VERSION }}
