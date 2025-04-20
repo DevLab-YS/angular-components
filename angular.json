@@ -31,6 +31,14 @@
                             "src/**/*.html"
                         ]
                     }
+                },
+                "test": {
+                    "builder": "@angular-devkit/build-angular:karma",
+                    "options": {
+                        "main": "test.ts",
+                        "karmaConfig": "karma.conf.js",
+                        "tsConfig": "tsconfig.spec.json"
+                    }
                 }
             }
         }
