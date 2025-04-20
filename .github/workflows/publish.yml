@@ -52,4 +52,4 @@ jobs:
                   git config user.name "github-actions[bot]"
                   git config user.email "github-actions[bot]@users.noreply.github.com"
                   git tag v${{ env.VERSION }}
-                  git push origin v${{ env.VERSION }}
+                  git push https://github-actions:${{ secrets.GH_TOKEN }}@github.com/YIRMELSANCHEZ/angular-components.git ${{ env.VERSION }}
