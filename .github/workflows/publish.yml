@@ -1,0 +1,55 @@
+name: Build and Publish to GitHub Packages
+
+on:
+    push:
+        branches:
+            - master
+        tags:
+            - 'v*'
+
+jobs:
+    build-and-publish:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout repo
+              uses: actions/checkout@v3
+
+            - name: Use Node.js
+              uses: actions/setup-node@v3
+              with:
+                  node-version: 22
+                  registry-url: https://npm.pkg.github.com/
+                  scope: '@yirmelsanchez'
+
+            - name: Install dependencies
+              run: npm ci
+
+            - name: Build (includes tests)
+              run: npm run build
+
+            - name: Get version from package.json
+              id: get_version
+              run: echo "VERSION=v$(node -p \"require('./package.json').version\")" >> $GITHUB_OUTPUT
+
+            - name: Check if tag already exists
+              run: |
+                  TAG_EXISTS=$(git tag -l "v${{ steps.get_version.outputs.VERSION }}")
+                  if [ -n "$TAG_EXISTS" ]; then
+                      echo "Tag ${{ steps.get_version.outputs.VERSION }} already exists, stopping deployment."
+                      exit 1
+                  else
+                      echo "Tag does not exist, proceeding with deployment."
+                  fi
+
+            - name: Publish to GitHub Packages
+              run: npm publish
+              env:
+                  NODE_AUTH_TOKEN: ${{ secrets.NODE_AUTH_TOKEN }}
+
+            - name: Create Git Tag
+              run: |
+                  git config user.name "github-actions[bot]"
+                  git config user.email "github-actions[bot]@users.noreply.github.com"
+                  git tag ${{ steps.get_version.outputs.VERSION }}
+                  git push origin ${{ steps.get_version.outputs.VERSION }}

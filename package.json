@@ -1,6 +1,9 @@
 {
-    "name": "angular-components",
+    "name": "@yirmelsanchez/angular-components",
     "version": "0.0.1",
+    "publishConfig": {
+        "registry": "https://npm.pkg.github.com/"
+    },
     "scripts": {
         "build": "npm run test && ng build",
         "build:watch": "ng build --watch --configuration=development",
