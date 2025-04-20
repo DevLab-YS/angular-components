@@ -30,13 +30,13 @@ jobs:
 
             - name: Get version from package.json
               id: get_version
-              run: echo "VERSION=v$(node -p \"require('./package.json').version\")" >> $GITHUB_OUTPUT
+              run: echo "VERSION=$(node -p \"require('./package.json').version\")" >> $GITHUB_ENV
 
             - name: Check if tag already exists
               run: |
-                  TAG_EXISTS=$(git tag -l "v${{ steps.get_version.outputs.VERSION }}")
+                  TAG_EXISTS=$(git tag -l "v${{ env.VERSION }}")
                   if [ -n "$TAG_EXISTS" ]; then
-                      echo "Tag ${{ steps.get_version.outputs.VERSION }} already exists, stopping deployment."
+                      echo "Tag v${{ env.VERSION }} already exists, stopping deployment."
                       exit 1
                   else
                       echo "Tag does not exist, proceeding with deployment."
@@ -51,5 +51,5 @@ jobs:
               run: |
                   git config user.name "github-actions[bot]"
                   git config user.email "github-actions[bot]@users.noreply.github.com"
-                  git tag ${{ steps.get_version.outputs.VERSION }}
-                  git push origin ${{ steps.get_version.outputs.VERSION }}
+                  git tag v${{ env.VERSION }}
+                  git push origin v${{ env.VERSION }}
