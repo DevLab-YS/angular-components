@@ -7,9 +7,13 @@
     "scripts": {
         "build": "npm run test && ng build",
         "build:watch": "ng build --watch --configuration=development",
+        "extract-tw-classes": "node scripts/extract-tw-classes.js",
         "lint": "ng lint",
+        "merge-translations": "node scripts/merge-translations.js",
+        "prebuild": "npm run merge-translations",
         "test": "ng test --browsers ChromeHeadless --watch=false",
-        "test:watch": "ng test --watch"
+        "test:watch": "ng test --watch",
+        "update-translations": "npm run merge-translations && node scripts/update-translations.js"
     },
     "peerDependencies": {
         "@angular/animations": "18.2.13",

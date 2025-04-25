@@ -1,0 +1,10 @@
+<div class="tw-w-full tw-h-screen tw-overflow-y-scroll tw-bg-background-primary tw-p-2">
+    <div class="tw-p-3">
+        <p class="tw-size-10 tw-font-bold tw-text-text-primary">
+            {{ translationPrefix + 'style-guide.title' | translate }}
+        </p>
+        @for (component of components; track $index) {
+            <ys-style-guide-section [component]="component"></ys-style-guide-section>
+        }
+    </div>
+</div>

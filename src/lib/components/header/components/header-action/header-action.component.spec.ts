@@ -50,7 +50,7 @@ describe('HeaderActionComponent', () => {
             });
 
             const classes = component.getTypeClasses();
-            expect(classes).toContain('tw-bg-primary');
+            expect(classes).toContain('tw-bg-text-primary');
         });
 
         it('should return correct class for SecondaryButton', () => {
@@ -61,7 +61,7 @@ describe('HeaderActionComponent', () => {
             });
 
             const classes = component.getTypeClasses();
-            expect(classes).toContain('tw-border-text-secondary');
+            expect(classes).toContain('tw-border-text-secondaryInverse');
         });
 
         it('should return correct class for Text', () => {

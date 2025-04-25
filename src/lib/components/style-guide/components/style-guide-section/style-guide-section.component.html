@@ -1,0 +1,18 @@
+@if (component) {
+    <div class="tw-w-full tw-py-3 tw-px-2 tw-rounded-lg tw-bg-background-secondary tw-mb-3">
+        <p class="tw-size-8 tw-font-bold tw-text-text-primary">
+            {{ translationPrefix + 'style-guide.component.' + component | translate }}
+        </p>
+
+        @switch (component) {
+            @case ('header') {
+                <ys-header-section></ys-header-section>
+            }
+            @default {
+                <p class="tw-text-text-primary">
+                    {{ translationPrefix + 'style-guide.error.component-not-found' | translate }}
+                </p>
+            }
+        }
+    </div>
+}

@@ -11,11 +11,11 @@ module.exports = {
                 groupBy: [
                     {
                         pattern: './src/lib/**/*.en.json',
-                        fileName: 'assets/i18n/en.json'
+                        fileName: 'assets/i18n/angular-components.en.json'
                     },
                     {
                         pattern: './src/lib/**/*.es.json',
-                        fileName: 'assets/i18n/es.json'
+                        fileName: 'assets/i18n/angular-components.es.json'
                     }
                 ]
             },

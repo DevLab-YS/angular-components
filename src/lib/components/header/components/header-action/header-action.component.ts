@@ -23,19 +23,19 @@ export class HeaderActionComponent {
     }
 
     getTypeClasses(): string {
-        const general = 'tw-text-sm tw-flex tw-items-center tw-transition-all tw-h-[40px]',
-            button = 'tw-rounded-md tw-px-2 tw-py-1',
-            primaryBtn = 'tw-text-text-primaryInverse tw-bg-primary tw-border-primary hover:tw-opacity-80',
+        const general =
+                'tw-text-sm tw-flex tw-items-center tw-transition-all tw-h-[40px] tw-mx-2 tw-cursor-pointer tw-border tw-rounded-md tw-px-2 tw-py-1 tw-font-semibold',
+            primaryBtn = 'tw-text-text-primaryInverse tw-bg-text-primary tw-border-text-primary hover:tw-opacity-80',
             secondaryBtn =
-                'tw-text-text-secondary tw-bg-transparent tw-border-text-secondary hover:tw-text-text-primary hover:tw-bg-text-secondary',
-            text = 'tw-text-text-primary tw-bg-transparent hover:tw-text-primary';
+                'tw-text-text-primary tw-bg-transparent tw-border-text-secondaryInverse hover:tw-bg-text-secondaryInverse  hover:tw-opacity-80',
+            text = 'tw-text-text-primary tw-bg-transparent hover:tw-text-primaryColor tw-border-transparent';
 
         if (this.action) {
             switch (this.action.type) {
                 case HeaderActionType.PrimaryButton:
-                    return `${general} ${button} ${primaryBtn}`;
+                    return `${general} ${primaryBtn}`;
                 case HeaderActionType.SecondaryButton:
-                    return `${general} ${button} ${secondaryBtn}`;
+                    return `${general} ${secondaryBtn}`;
                 case HeaderActionType.Text:
                     return `${general} ${text}`;
                 default:

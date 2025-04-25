@@ -1,0 +1,31 @@
+{
+    "angular-components": {
+        "style-guide": {
+            "component": {
+                "header": "Header"
+            },
+            "error": {
+                "component-not-found": "Component not found"
+            },
+            "section": {
+                "header": {
+                    "header": {
+                        "delete": {
+                            "label": "Delete"
+                        },
+                        "edit": {
+                            "label": "Edit"
+                        },
+                        "filters": {
+                            "label": "Filters"
+                        },
+                        "new": {
+                            "label": "New"
+                        }
+                    }
+                }
+            },
+            "title": "Style Guide"
+        }
+    }
+}
