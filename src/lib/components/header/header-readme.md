@@ -7,7 +7,7 @@ El `HeaderComponent` es un componente flexible y configurable que permite defini
 ## Ejemplo de uso básico
 
 ```ts
-import { HeaderConfig, HeaderAction, HeaderActionType } from '@ys/angular-components';
+import { HeaderConfig, HeaderAction, HeaderActionType } from '@yirmelsanchez/angular-components';
 
 this.headerConfig = new HeaderConfig({
     prefix: 'dashboard.header',
@@ -107,5 +107,5 @@ Ejemplo:
 ## Recomendaciones
 
 -   Las acciones deben tener claves únicas dentro del header.
--   Usá `showLabel` en `false` si solo querés mostrar el icono.
+-   Usa `showLabel` en `false` si solo querés mostrar el icono.
 -   El `prefix` permite organizar mejor las traducciones por módulo o sección.

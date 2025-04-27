@@ -1,13 +1,15 @@
 const fs = require('fs');
 const path = require('path');
 
-const sourceDir = path.resolve(__dirname, '../src/lib'); // Source directory
-const targetDir = path.resolve(__dirname, '../src/lib/assets/i18n'); // Target directory
+const sourceDirs = [path.resolve(__dirname, '../src/lib/components'), path.resolve(__dirname, '../src/lib/shared')];
+
+const targetDir = path.resolve(__dirname, '../src/lib/assets/i18n');
 
 const languages = ['en', 'es'];
 
 function findFilesRecursively(dir, extension) {
     let results = [];
+    if (!fs.existsSync(dir)) return results;
     const files = fs.readdirSync(dir);
     for (const file of files) {
         const filePath = path.join(dir, file);
@@ -21,6 +23,19 @@ function findFilesRecursively(dir, extension) {
     return results;
 }
 
+// Deep merge
+function deepMerge(target, source) {
+    for (const key of Object.keys(source)) {
+        if (source[key] instanceof Object && target[key] instanceof Object) {
+            deepMerge(target[key], source[key]);
+        } else {
+            target[key] = source[key];
+        }
+    }
+    return target;
+}
+
+// Merge translations
 function mergeTranslations() {
     if (!fs.existsSync(targetDir)) {
         fs.mkdirSync(targetDir, { recursive: true });
@@ -28,14 +43,22 @@ function mergeTranslations() {
 
     languages.forEach(lang => {
         const extension = `.${lang}.json`;
-        const files = findFilesRecursively(sourceDir, extension);
 
-        const mergedTranslations = files.reduce((acc, filePath) => {
-            const content = JSON.parse(fs.readFileSync(filePath, 'utf-8'));
-            return { ...acc, ...content };
+        let allFiles = [];
+        for (const dir of sourceDirs) {
+            allFiles = allFiles.concat(findFilesRecursively(dir, extension));
+        }
+
+        const mergedTranslations = allFiles.reduce((acc, filePath) => {
+            try {
+                const content = JSON.parse(fs.readFileSync(filePath, 'utf-8'));
+                return deepMerge(acc, content);
+            } catch (e) {
+                console.warn(`Error parsing ${filePath}: ${e.message}`);
+                return acc;
+            }
         }, {});
 
-        // Save the merged translations to the target directory
         const targetFilePath = path.join(targetDir, `angular-components.${lang}.json`);
         fs.writeFileSync(targetFilePath, JSON.stringify(mergedTranslations, null, 4), 'utf-8');
         console.log(`Merged translations for ${lang} saved to ${targetFilePath}`);

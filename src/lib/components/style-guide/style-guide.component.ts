@@ -13,7 +13,7 @@ import { LIBRARY_CONSTANTS } from '../../shared/models/library-constants.model';
 })
 export class StyleGuideComponent {
     @Input()
-    components: StyleGuideComponentType[] = [StyleGuideComponentType.Header];
+    components: StyleGuideComponentType[] = [StyleGuideComponentType.Header, StyleGuideComponentType.Table];
 
     translationPrefix = LIBRARY_CONSTANTS.TRANSLATIONS_PREFIX;
 }

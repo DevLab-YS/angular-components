@@ -1,0 +1,16 @@
+@if (cell) {
+    @switch (cell.type) {
+        @case ('text') {
+            <span>{{ cell.translate ? (cell.content + '' | translate) : cell.content }}</span>
+        }
+        @case ('link') {
+            <span
+                class="tw-text-primaryColor hover:tw-text-primaryInverse tw-underline tw-cursor-pointer"
+                (click)="clickLink()"
+            >
+                {{ cell.translate ? (cell.content + '' | translate) : cell.content }}
+            </span>
+        }
+        @default {}
+    }
+}

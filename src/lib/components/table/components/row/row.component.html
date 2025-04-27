@@ -1,0 +1,23 @@
+@if (row && config) {
+    <tr
+        class="tw-text-left tw-w-full tw-flex tw-text-text-primary"
+        [ngClass]="{
+            'tw-bg-background-tertiary': row.selected
+        }"
+    >
+        @if (config.selectable) {
+            <td class="tw-py-2 tw-w-[15px]">
+                <ys-checkbox [(checked)]="row.selected" (checkedChange)="updateSelectedValue()"></ys-checkbox>
+            </td>
+        }
+        @for (cell of row.cells; track $index) {
+            <td
+                class="tw-px-4 tw-py-2 tw-truncate tw-block"
+                [ngStyle]="{ width: getColumnWidth($index) }"
+                [ngbTooltip]="cell.translate ? (cell.tooltip + '' | translate) : cell.tooltip"
+            >
+                <app-table-cell [cell]="cell"></app-table-cell>
+            </td>
+        }
+    </tr>
+}

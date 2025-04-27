@@ -1,0 +1,9 @@
+{
+    "angular-components": {
+        "table": {
+            "no-content": {
+                "label": "There are no rows to display"
+            }
+        }
+    }
+}

@@ -1,12 +1,15 @@
 @if (component) {
     <div class="tw-w-full tw-py-3 tw-px-2 tw-rounded-lg tw-bg-background-secondary tw-mb-3">
-        <p class="tw-size-8 tw-font-bold tw-text-text-primary">
+        <p class="tw-font-bold tw-text-text-primary" style="font-size: clamp(1.5625rem, calc(0.16rem + 4.06vw), 2rem)">
             {{ translationPrefix + 'style-guide.component.' + component | translate }}
         </p>
 
         @switch (component) {
             @case ('header') {
                 <ys-header-section></ys-header-section>
+            }
+            @case ('table') {
+                <ys-table-section></ys-table-section>
             }
             @default {
                 <p class="tw-text-text-primary">

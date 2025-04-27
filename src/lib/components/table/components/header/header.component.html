@@ -1,0 +1,23 @@
+@if (config) {
+    <thead class="tw-text-text-primary tw-w-full tw-block !tw-font-normal">
+        <tr class="tw-text-left tw-w-full tw-flex">
+            @if (config.selectable) {
+                <th class="tw-py-2 tw-w-[15px]">
+                    <ys-checkbox [(checked)]="allRowsSelected" (checkedChange)="updateSelectedValue()"></ys-checkbox>
+                </th>
+            }
+            @for (column of config.columns; track $index) {
+                <th
+                    class="tw-px-4 tw-py-2 tw-truncate tw-block"
+                    [ngStyle]="{
+                        width: getColumnWidth(column)
+                    }"
+                    [ngbTooltip]="config.prefix + '.' + column.key + '.tooltip' | translate"
+                    [disableTooltip]="!config.showTooltip"
+                >
+                    {{ config.prefix + '.' + column.key + '.label' | translate }}
+                </th>
+            }
+        </tr>
+    </thead>
+}

@@ -4,11 +4,12 @@ import { StyleGuideComponentType } from '../../models/style-guide-config.model';
 import { TranslateModule } from '@ngx-translate/core';
 import { HeaderSectionComponent } from '../header-section/header-section.component';
 import { LIBRARY_CONSTANTS } from '../../../../shared/models/library-constants.model';
+import { TableSectionComponent } from '../table-section/table-section.component';
 
 @Component({
     selector: 'ys-style-guide-section',
     standalone: true,
-    imports: [CommonModule, TranslateModule, HeaderSectionComponent],
+    imports: [CommonModule, TranslateModule, HeaderSectionComponent, TableSectionComponent],
     templateUrl: './style-guide-section.component.html'
 })
 export class StyleGuideSectionComponent {

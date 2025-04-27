@@ -1,3 +1,4 @@
 export enum StyleGuideComponentType {
-    Header = 'header'
+    Header = 'header',
+    Table = 'table'
 }

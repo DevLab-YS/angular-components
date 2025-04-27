@@ -1,0 +1,22 @@
+<div class="tw-py-3 tw-w-full tw-mb-2">
+    <p class="tw-text-text-primary tw-text-lg !tw-my-3 tw-font-semibold">
+        {{ translationPrefix + 'style-guide.section.table.title.unselectable' | translate }}
+    </p>
+    <div class="tw-mb-2 tw-p-2 tw-rounded tw-bg-background-primary">
+        <ys-table [config]="unselectableTableConfig"></ys-table>
+    </div>
+
+    <p class="tw-text-text-primary tw-text-lg !tw-my-3 tw-font-semibold">
+        {{ translationPrefix + 'style-guide.section.table.title.selectable' | translate }}
+    </p>
+    <div class="tw-mb-2 tw-p-2 tw-rounded tw-bg-background-primary">
+        <ys-table [config]="selectableTableConfig"></ys-table>
+    </div>
+
+    <p class="tw-text-text-primary tw-text-lg !tw-my-3 tw-font-semibold">
+        {{ translationPrefix + 'style-guide.section.table.title.empty' | translate }}
+    </p>
+    <div class="tw-mb-2 tw-p-2 tw-rounded tw-bg-background-primary">
+        <ys-table [config]="emptyTableConfig"></ys-table>
+    </div>
+</div>

@@ -1,0 +1,9 @@
+{
+    "angular-components": {
+        "table": {
+            "no-content": {
+                "label": "No hay filas para mostrar"
+            }
+        }
+    }
+}

@@ -1,6 +1,9 @@
 <div class="tw-w-full tw-h-screen tw-overflow-y-scroll tw-bg-background-primary tw-p-2">
     <div class="tw-p-3">
-        <p class="tw-size-10 tw-font-bold tw-text-text-primary">
+        <p
+            class="tw-font-bold tw-text-primaryColor tw-opacity-80"
+            style="font-size: clamp(0.6rem, calc(0.31rem + 1.97vw), 0.875rem)"
+        >
             {{ translationPrefix + 'style-guide.title' | translate }}
         </p>
         @for (component of components; track $index) {

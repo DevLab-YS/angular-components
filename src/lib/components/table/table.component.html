@@ -1,0 +1,29 @@
+@if (config) {
+    <div class="tw-w-full">
+        <table class="tw-w-full tw-rounded-lg tw-block">
+            <ys-table-header
+                [config]="config"
+                [allRowsSelected]="allSelected"
+                (headerSelected)="headerSelected($event)"
+                class="tw-block tw-w-full tw-border-b tw-border-text-secondaryInverse"
+            ></ys-table-header>
+            <tbody
+                class="tw-w-full tw-block tw-divide-y tw-divide-text-secondaryInverse tw-overflow-y-scroll tw-scrollbar"
+                [ngStyle]="{
+                    height: config.height
+                }"
+            >
+                @if (rows.length === 0) {
+                    <tr class="tw-text-text-primary tw-w-full tw-block hover:tw-bg-opacity-50">
+                        <td class="tw-px-4 tw-py-2 tw-w-full tw-block tw-text-center">
+                            {{ translationPrefix + 'table.no-content.label' | translate }}
+                        </td>
+                    </tr>
+                }
+                @for (row of rows; track $index) {
+                    <ys-table-row [row]="row" [config]="config" (rowSelected)="rowSelected()"></ys-table-row>
+                }
+            </tbody>
+        </table>
+    </div>
+}

@@ -2,7 +2,8 @@
     "angular-components": {
         "style-guide": {
             "component": {
-                "header": "Encabezado"
+                "header": "Encabezado",
+                "table": "Tabla"
             },
             "error": {
                 "component-not-found": "Componente no encontrado"
@@ -22,6 +23,21 @@
                         "new": {
                             "label": "Nuevo"
                         }
+                    }
+                },
+                "table": {
+                    "table": {
+                        "name": {
+                            "label": "Nombre"
+                        },
+                        "path": {
+                            "label": "Ruta"
+                        }
+                    },
+                    "title": {
+                        "empty": "Vacío",
+                        "selectable": "Seleccionable",
+                        "unselectable": "No seleccionable"
                     }
                 }
             },
