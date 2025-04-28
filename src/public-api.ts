@@ -14,3 +14,7 @@ export { CellType, LinkTableCell, TableCell, TextTableCell } from './lib/compone
 // List
 export { ListComponent } from './lib/components/list/list.component';
 export { ListConfig, ListItem, ListItemType, ListSection } from './lib/components/list/models/list-config.model';
+
+// Tree
+export { TreeComponent } from './lib/components/tree/tree.component';
+export { TreeConfig, TreeNode } from './lib/components/tree/models/tree-config.model';

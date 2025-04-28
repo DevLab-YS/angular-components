@@ -4,7 +4,8 @@
             "component": {
                 "header": "Header",
                 "list": "List",
-                "table": "Table"
+                "table": "Table",
+                "tree": "Tree"
             },
             "error": {
                 "component-not-found": "Component not found"

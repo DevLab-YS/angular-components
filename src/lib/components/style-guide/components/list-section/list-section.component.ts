@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
-import { HeaderAction, HeaderActionType, HeaderConfig } from '../../../header/models/header-config.model';
 import { ListComponent } from '../../../list/list.component';
 import { ListConfig, ListItem, ListItemType, ListSection } from '../../../list/models/list-config.model';
 

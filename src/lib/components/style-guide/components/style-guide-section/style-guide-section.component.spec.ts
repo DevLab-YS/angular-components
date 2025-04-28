@@ -5,6 +5,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { HeaderSectionComponent } from '../header-section/header-section.component';
 import { TableSectionComponent } from '../table-section/table-section.component';
 import { ListSectionComponent } from '../list-section/list-section.component';
+import { TreeSectionComponent } from '../tree-section/tree-section.component';
 
 describe('StyleGuideSectionComponent', () => {
     let component: StyleGuideSectionComponent;
@@ -17,7 +18,8 @@ describe('StyleGuideSectionComponent', () => {
                 HeaderSectionComponent,
                 TranslateModule,
                 TableSectionComponent,
-                ListSectionComponent
+                ListSectionComponent,
+                TreeSectionComponent
             ]
         }).compileComponents();
 

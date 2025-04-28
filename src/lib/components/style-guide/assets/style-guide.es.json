@@ -4,7 +4,8 @@
             "component": {
                 "header": "Encabezado",
                 "list": "Lista",
-                "table": "Tabla"
+                "table": "Tabla",
+                "tree": "Árbol"
             },
             "error": {
                 "component-not-found": "Componente no encontrado"

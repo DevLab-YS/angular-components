@@ -14,6 +14,9 @@
             @case ('table') {
                 <ys-table-section></ys-table-section>
             }
+            @case ('tree') {
+                <ys-tree-section></ys-tree-section>
+            }
             @default {
                 <p class="tw-text-text-primary">
                     {{ translationPrefix + 'style-guide.error.component-not-found' | translate }}

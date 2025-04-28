@@ -1,0 +1,5 @@
+@if (config) {
+    @for (node of config.nodes; track $index) {
+        <ys-tree-node [node]="node" [config]="config" [level]="level"></ys-tree-node>
+    }
+}

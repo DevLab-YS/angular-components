@@ -1,0 +1,30 @@
+@if (node && config) {
+    <div class="tw-text-text-secondary tw-cursor-pointer tw-flex hover:tw-bg-background-tertiary" (click)="clickNode()">
+        <!-- offset -->
+        @for (offset of getOffsetArray(); track $index) {
+            <div class="tw-w-[20px] tw-pl-2">
+                <div class="tw-w-1 tw-border-l-text-secondaryInverse tw-border-l tw-text-transparent tw-select-none">
+                    .
+                </div>
+            </div>
+        }
+        <!-- icon -->
+        <fa-icon
+            class="tw-mr-2 tw-w-[20px]"
+            size="lg"
+            [icon]="node.showChildren ? openIcon : closeIcon"
+            [ngClass]="{
+                'tw-opacity-0': node.children.length === 0
+            }"
+        ></fa-icon>
+        <!-- title -->
+        <p class="tw-text-sm tw-text-text-primary !tw-mb-0 tw-select-none !tw-mt-[0.2rem]" [ngbTooltip]="node.tooltip">
+            {{ node.translate ? (config.prefix + '.' + node.label | translate) : node.label }}
+        </p>
+    </div>
+    @if (node.showChildren) {
+        @for (childNode of node.children; track $index) {
+            <ys-tree-node [node]="childNode" [config]="config" [level]="level + 1"></ys-tree-node>
+        }
+    }
+}

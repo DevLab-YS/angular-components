@@ -6,11 +6,19 @@ import { HeaderSectionComponent } from '../header-section/header-section.compone
 import { LIBRARY_CONSTANTS } from '../../../../shared/models/library-constants.model';
 import { TableSectionComponent } from '../table-section/table-section.component';
 import { ListSectionComponent } from '../list-section/list-section.component';
+import { TreeSectionComponent } from '../tree-section/tree-section.component';
 
 @Component({
     selector: 'ys-style-guide-section',
     standalone: true,
-    imports: [CommonModule, TranslateModule, HeaderSectionComponent, TableSectionComponent, ListSectionComponent],
+    imports: [
+        CommonModule,
+        TranslateModule,
+        HeaderSectionComponent,
+        TableSectionComponent,
+        ListSectionComponent,
+        TreeSectionComponent
+    ],
     templateUrl: './style-guide-section.component.html'
 })
 export class StyleGuideSectionComponent {
