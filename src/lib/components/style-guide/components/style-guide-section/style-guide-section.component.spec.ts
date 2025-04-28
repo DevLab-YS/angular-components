@@ -4,6 +4,7 @@ import { StyleGuideSectionComponent } from './style-guide-section.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { HeaderSectionComponent } from '../header-section/header-section.component';
 import { TableSectionComponent } from '../table-section/table-section.component';
+import { ListSectionComponent } from '../list-section/list-section.component';
 
 describe('StyleGuideSectionComponent', () => {
     let component: StyleGuideSectionComponent;
@@ -11,7 +12,13 @@ describe('StyleGuideSectionComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            imports: [CommonModule, HeaderSectionComponent, TranslateModule, TableSectionComponent]
+            imports: [
+                CommonModule,
+                HeaderSectionComponent,
+                TranslateModule,
+                TableSectionComponent,
+                ListSectionComponent
+            ]
         }).compileComponents();
 
         fixture = TestBed.createComponent(StyleGuideSectionComponent);

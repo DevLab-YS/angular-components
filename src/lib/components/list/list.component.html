@@ -1,0 +1,37 @@
+@if (config) {
+    @for (section of config.sections; track $index) {
+        <!-- card section -->
+        <div class="tw-w-full tw-px-2 tw-pb-2">
+            <!-- header -->
+            @if (section.showTitle) {
+                <div class="tw-text-text-secondary tw-cursor-pointer tw-flex" (click)="clickHeader(section)">
+                    <!-- icon -->
+                    <fa-icon class="tw-mr-2" size="lg" [icon]="section.showItems ? openIcon : closeIcon"></fa-icon>
+                    <!-- title -->
+                    <p
+                        class="tw-text-sm !tw-mb-0 tw-select-none"
+                        [ngbTooltip]="config.prefix + '.' + section.key + '.tooltip' | translate"
+                    >
+                        {{ config.prefix + '.' + section.key + '.label' | translate }}
+                    </p>
+                </div>
+            }
+            <!-- items -->
+            @if (section.showItems) {
+                <ul>
+                    @for (item of section.items; track $index) {
+                        <li [class]="getItemClasses(item)">
+                            <!-- label -->
+                            <p
+                                class="tw-text-text-primary !tw-mb-0 tw-text-ellipsis tw-whitespace-nowrap tw-overflow-hidden tw-select-none"
+                                [ngbTooltip]="item.tooltip"
+                            >
+                                {{ item.title | translate }}
+                            </p>
+                        </li>
+                    }
+                </ul>
+            }
+        </div>
+    }
+}

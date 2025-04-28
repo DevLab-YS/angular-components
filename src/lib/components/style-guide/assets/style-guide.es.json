@@ -3,6 +3,7 @@
         "style-guide": {
             "component": {
                 "header": "Encabezado",
+                "list": "Lista",
                 "table": "Tabla"
             },
             "error": {
@@ -22,6 +23,18 @@
                         },
                         "new": {
                             "label": "Nuevo"
+                        }
+                    }
+                },
+                "list": {
+                    "list": {
+                        "card": {
+                            "label": "Tarjetas",
+                            "tooltip": "Elementos de tarjeta"
+                        },
+                        "text": {
+                            "label": "Textos",
+                            "tooltip": "Elementos de texto"
                         }
                     }
                 },

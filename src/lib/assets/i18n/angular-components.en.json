@@ -3,6 +3,7 @@
         "style-guide": {
             "component": {
                 "header": "Header",
+                "list": "List",
                 "table": "Table"
             },
             "error": {
@@ -22,6 +23,18 @@
                         },
                         "new": {
                             "label": "New"
+                        }
+                    }
+                },
+                "list": {
+                    "list": {
+                        "card": {
+                            "label": "Cards",
+                            "tooltip": "Card items"
+                        },
+                        "text": {
+                            "label": "Texts",
+                            "tooltip": "Text items"
                         }
                     }
                 },
@@ -45,7 +58,7 @@
         },
         "table": {
             "no-content": {
-                "label": "There are no items to display"
+                "label": "There are no rows to display"
             }
         }
     }
