@@ -15,28 +15,22 @@ export class TreeSectionComponent {
         prefix: 'angular-components.style-guide.section.tree.tree',
         nodes: [
             new TreeNode({
-                label: 'Node 1',
-                translate: false
+                label: 'Node 1'
             }),
             new TreeNode({
                 label: 'Node 2',
-                translate: false,
                 children: [
                     new TreeNode({
-                        label: 'Child node 1',
-                        translate: false
+                        label: 'Child node 1'
                     }),
                     new TreeNode({
-                        label: 'Child node 2',
-                        translate: false
+                        label: 'Child node 2'
                     })
                 ]
             }),
             new TreeNode({
-                label: 'Node 3',
-                translate: false
+                label: 'Node 3'
             })
-        ],
-        clickNode: node => {}
+        ]
     });
 }

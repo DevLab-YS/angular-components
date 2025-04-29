@@ -18,7 +18,10 @@
             }"
         ></fa-icon>
         <!-- title -->
-        <p class="tw-text-sm tw-text-text-primary !tw-mb-0 tw-select-none !tw-mt-[0.2rem]" [ngbTooltip]="node.tooltip">
+        <p
+            class="tw-text-sm tw-text-text-primary !tw-mb-0 tw-select-none !tw-mt-[0.2rem]"
+            [ngbTooltip]="node.translate ? (node.tooltip | translate) : node.tooltip"
+        >
             {{ node.translate ? (config.prefix + '.' + node.label | translate) : node.label }}
         </p>
     </div>

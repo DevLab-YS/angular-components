@@ -13,7 +13,7 @@ export class TreeConfig {
 export interface TreeConfigParameters {
     prefix: string;
     nodes: TreeNode[];
-    clickNode: (treeNode: TreeNode) => void;
+    clickNode?: (treeNode: TreeNode) => void;
 }
 
 export class TreeNode {
@@ -28,7 +28,7 @@ export class TreeNode {
         label,
         content,
         showChildren = false,
-        translate = true,
+        translate = false,
         tooltip = '',
         children = []
     }: TreeNodeParameters) {
