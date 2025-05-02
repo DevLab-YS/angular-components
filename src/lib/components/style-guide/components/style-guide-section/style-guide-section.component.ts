@@ -7,6 +7,7 @@ import { LIBRARY_CONSTANTS } from '../../../../shared/models/library-constants.m
 import { TableSectionComponent } from '../table-section/table-section.component';
 import { ListSectionComponent } from '../list-section/list-section.component';
 import { TreeSectionComponent } from '../tree-section/tree-section.component';
+import { FormSectionComponent } from '../form-section/form-section.component';
 
 @Component({
     selector: 'ys-style-guide-section',
@@ -17,7 +18,8 @@ import { TreeSectionComponent } from '../tree-section/tree-section.component';
         HeaderSectionComponent,
         TableSectionComponent,
         ListSectionComponent,
-        TreeSectionComponent
+        TreeSectionComponent,
+        FormSectionComponent
     ],
     templateUrl: './style-guide-section.component.html'
 })

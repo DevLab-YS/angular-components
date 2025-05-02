@@ -1,0 +1,29 @@
+@if (section && formConfig) {
+    <div class="tw-w-full tw-mb-2">
+        <!-- title -->
+        @if (section.showTitle) {
+            <span
+                class="tw-text-lg tw-font-semibold tw-text-text-primary tw-mb-1"
+                [ngbTooltip]="getSectionKey() + '.tooltip' | translate"
+            >
+                {{ getSectionKey() + '.label' | translate }}
+            </span>
+        }
+        <!-- rows -->
+        @for (row of section.fields; track $index) {
+            <div class="tw-w-full tw-flex tw-gap-2">
+                @for (field of row; track $index) {
+                    @if (!field.hidden) {
+                        <ys-form-field
+                            class="tw-block"
+                            [style.width]="getFieldWidth(field)"
+                            [field]="field"
+                            [prefix]="getSectionKey()"
+                            (change)="fieldChange()"
+                        ></ys-form-field>
+                    }
+                }
+            </div>
+        }
+    </div>
+}

@@ -7,7 +7,7 @@ El `ListComponent` es un componente flexible para mostrar listas dinámicas y co
 ## Ejemplo de uso básico
 
 ```ts
-import { ListConfig, ListSection, ListItem, ListItemType } from './models/list-config.model';
+import { ListConfig, ListSection, ListItem, ListItemType } from '@yirmelsanchez/angular-components';
 
 this.listConfig = new ListConfig({
     prefix: 'items.list',

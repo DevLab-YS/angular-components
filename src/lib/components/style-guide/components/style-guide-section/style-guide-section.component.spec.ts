@@ -6,6 +6,7 @@ import { HeaderSectionComponent } from '../header-section/header-section.compone
 import { TableSectionComponent } from '../table-section/table-section.component';
 import { ListSectionComponent } from '../list-section/list-section.component';
 import { TreeSectionComponent } from '../tree-section/tree-section.component';
+import { FormSectionComponent } from '../form-section/form-section.component';
 
 describe('StyleGuideSectionComponent', () => {
     let component: StyleGuideSectionComponent;
@@ -19,7 +20,8 @@ describe('StyleGuideSectionComponent', () => {
                 TranslateModule,
                 TableSectionComponent,
                 ListSectionComponent,
-                TreeSectionComponent
+                TreeSectionComponent,
+                FormSectionComponent
             ]
         }).compileComponents();
 

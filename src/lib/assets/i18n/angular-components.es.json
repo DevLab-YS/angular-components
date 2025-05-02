@@ -1,7 +1,19 @@
 {
     "angular-components": {
+        "form": {
+            "button": {
+                "cancel": "Cancelar",
+                "save": "Guardar"
+            },
+            "message": {
+                "check-fields": "Por favor, complete o verifique los campos requeridos",
+                "has-no-changes": "No se han realizado cambios",
+                "required-field": "Campo obligatorio"
+            }
+        },
         "style-guide": {
             "component": {
+                "form": "Formulario",
                 "header": "Encabezado",
                 "list": "Lista",
                 "table": "Tabla",
@@ -11,6 +23,46 @@
                 "component-not-found": "Componente no encontrado"
             },
             "section": {
+                "form": {
+                    "form": {
+                        "general": {
+                            "address": {
+                                "label": "Dirección",
+                                "placeholder": "Escriba una dirección"
+                            },
+                            "category": {
+                                "label": "Categoría",
+                                "option": {
+                                    "fast-food": "Comida rápida",
+                                    "other": "Otro",
+                                    "traditional": "Tradicional"
+                                },
+                                "placeholder": "Seleccione una categoría"
+                            },
+                            "label": "General",
+                            "name": {
+                                "label": "Nombre",
+                                "placeholder": "Escriba un nombre"
+                            },
+                            "role": {
+                                "label": "Rol",
+                                "placeholder": "Escriba un rol"
+                            },
+                            "tooltip": "Sección general",
+                            "type": {
+                                "label": "Tipo",
+                                "option": {
+                                    "client": "Cliente",
+                                    "restaurant": "Restaurante"
+                                },
+                                "placeholder": "Seleccione un tipo"
+                            }
+                        },
+                        "header": {
+                            "new-user": "Nuevo usuario"
+                        }
+                    }
+                },
                 "header": {
                     "header": {
                         "delete": {

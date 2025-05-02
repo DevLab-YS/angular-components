@@ -1,0 +1,10 @@
+@if (button) {
+    <button
+        [class]="getClasses()"
+        [ngbTooltip]="button.tooltip | translate"
+        [disabled]="button.disabled"
+        (click)="onClick()"
+    >
+        {{ button.label | translate }}
+    </button>
+}

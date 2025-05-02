@@ -1,0 +1,22 @@
+@if (config) {
+    <div class="tw-w-full tw-py-3">
+        <!-- sections -->
+        <div
+            class="tw-w-full tw-overflow-y-auto tw-overflow-x-hidden tw-px-4 tw-rounded"
+            [style]="getFormHeightStyle()"
+        >
+            @for (section of config.sections; track $index) {
+                <ys-form-section
+                    [section]="section"
+                    [formConfig]="config"
+                    (valueChange)="sectionValueChange()"
+                ></ys-form-section>
+            }
+        </div>
+        <!-- buttons -->
+        <div class="tw-w-full tw-mt-3 tw-px-4 tw-flex tw-justify-end">
+            <ys-button [button]="cancelButton"></ys-button>
+            <ys-button [button]="saveButton"></ys-button>
+        </div>
+    </div>
+}

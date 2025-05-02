@@ -1,0 +1,47 @@
+@if (field && !field.hidden) {
+    <div class="tw-flex tw-flex-column tw-flex-wrap tw-w-full">
+        <div class="tw-mt-2 tw-w-full">
+            <label class="tw-text-sm tw-text-text-secondary">
+                {{ getFieldKey() + '.label' | translate }}
+                @if (field.required) {
+                    <span
+                        class="tw-text-primaryColor"
+                        [ngbTooltip]="translatePrefix + 'form.message.required-field' | translate"
+                    >
+                        *
+                    </span>
+                }
+            </label>
+            @switch (field.type) {
+                @case ('text') {
+                    <input
+                        type="text"
+                        [(ngModel)]="field.value.current"
+                        [placeholder]="getFieldKey() + '.placeholder' | translate"
+                        [class]="getClasses()"
+                        [disabled]="field.disabled"
+                        (input)="inputChange()"
+                    />
+                }
+                @case ('select') {
+                    <select
+                        [(ngModel)]="field.value.current"
+                        [class]="getClasses()"
+                        [disabled]="field.disabled"
+                        (input)="inputChange()"
+                    >
+                        <option [value]="''" selected>
+                            {{ getFieldKey() + '.placeholder' | translate }}
+                        </option>
+                        @for (option of getSelectFilter().options; track $index) {
+                            <option [value]="option.value">
+                                {{ getFieldKey() + '.option.' + option.value | translate }}
+                            </option>
+                        }
+                    </select>
+                }
+                @default {}
+            }
+        </div>
+    </div>
+}

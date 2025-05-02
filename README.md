@@ -1,24 +1,126 @@
-# AngularComponents
+# Angular Component Library
 
-This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.0.
+Esta es una librería de componentes desarrollada en Angular que permite construir interfaces reutilizables, modernas y altamente configurables. Cada componente está diseñado para integrarse fácilmente en proyectos y puede personalizarse mediante configuración, traducciones y estilos.
 
-## Code scaffolding
+---
 
-Run `ng generate component component-name --project angular-components` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module --project angular-components`.
-> Note: Don't forget to add `--project angular-components` or else it will be added to the default project in your `angular.json` file. 
+## Componentes principales
 
-## Build
+| Componente        | Descripción                              | Documentación                                              |
+| ----------------- | ---------------------------------------- | ---------------------------------------------------------- |
+| `FormComponent`   | Componente de formularios configurables. | [Ver README](./src/lib/components/form/form-readme.md)     |
+| `HeaderComponent` | Componente de cabeceras configurables.   | [Ver README](./src/lib/components/header/header-readme.md) |
+| `ListComponent`   | Visualización de listas dinámicas.       | [Ver README](./src/lib/components/list/list-readme.md)     |
+| `TableComponent`  | Componente de tablas configurables.      | [Ver README](./src/lib/components/table/table-readme.md)   |
+| `TreeComponent`   | Visualización de árboles dinámicos.      | [Ver README](./src/lib/components/tree/tree-readme.md)     |
 
-Run `ng build angular-components` to build the project. The build artifacts will be stored in the `dist/` directory.
+---
 
-## Publishing
+## Componentes auxiliares
 
-After building your library with `ng build angular-components`, go to the dist folder `cd dist/angular-components` and run `npm publish`.
+| Componente            | Descripción                         | Ubicación                        |
+| --------------------- | ----------------------------------- | -------------------------------- |
+| `ButtonComponent`     | Botones estandarizados.             | `src/lib/components/button`      |
+| `CheckboxComponent`   | Checkboxs.                          | `src/lib/components/checkbox`    |
+| `StyleGuideComponent` | Estilos por defecto de la librería. | `src/lib/components/style-guide` |
 
-## Running unit tests
+---
 
-Run `ng test angular-components` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## Uso básico
 
-## Further help
+```ts
+import { FormConfig, FormSection, TextFormField } from '@yirmelsanchez/angular-components';
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+this.formConfig = new FormConfig({
+    prefix: 'user.form',
+    header: 'Formulario',
+    sections: [
+        new FormSection({
+            key: 'main',
+            fields: [[new TextFormField({ key: 'username' })]]
+        })
+    ],
+    submitAction: value => console.log(value)
+});
+```
+
+---
+
+## Estilos y TailwindCSS
+
+Esta librería utiliza [TailwindCSS](https://tailwindcss.com/) para los estilos. Además, se apoya en variables CSS que deben definirse en tu aplicación principal.
+
+### Variables CSS requeridas
+
+Incluye estas definiciones en tu `styles.scss` o en el archivo global de estilos:
+
+```css
+:root {
+    --primary-color: #045256;
+    --primary-inverse-color: #0f7e82;
+    --secondary-color: #ddf7f8;
+    --tertiary-color: #9ab8ba;
+
+    --background-primary-color: #ffffff;
+    --background-secondary-color: #f0f0f0;
+    --background-tertiary-color: #d3d3d3;
+
+    --text-primary-color: #212121;
+    --text-secondary-color: #757575;
+    --text-primary-inverse-color: #ffffff;
+    --text-secondary-inverse-color: #bdbdbd;
+
+    --warning-color: #f2994a;
+    --warning-inverse-color: #ffcc9b;
+    --danger-color: #e74c3c;
+    --danger-inverse-color: #ffb3ae;
+}
+
+:root.dark-theme {
+    --primary-color: #0f7e82;
+    --primary-inverse-color: #045256;
+    --secondary-color: #102f30;
+    --tertiary-color: #3c5052;
+
+    --background-primary-color: #121212;
+    --background-secondary-color: #282828;
+    --background-tertiary-color: #575757;
+
+    --text-primary-color: #ffffff;
+    --text-secondary-color: #bdbdbd;
+    --text-primary-inverse-color: #212121;
+    --text-secondary-inverse-color: #757575;
+
+    --warning-color: #ffcc9b;
+    --warning-inverse-color: #f2994a;
+    --danger-color: #ffb3ae;
+    --danger-inverse-color: #e74c3c;
+}
+```
+
+### Configuración de `tailwind.config.ts`
+
+A continuación se muestra un [ejemplo](./tailwind.config.js) de configuración Tailwind para configurar los estilos de los componentes asignando las variables anteriores.
+
+---
+
+## Pruebas
+
+Cada componente incluye su archivo de test `.spec.ts`. Se recomienda ejecutar `ng test`.
+
+---
+
+## Recomendaciones
+
+-   Usa `TranslateModule` de `@ngx-translate` para soporte multilenguaje.
+-   Configura correctamente las claves `prefix` para traducciones consistentes.
+-   Usa claves únicas para secciones y campos (`section.fieldName`).
+-   Asegúrate de definir todas las variables CSS necesarias.
+-   Los estilos siguen el enfoque utilitario de Tailwind, evita sobrescribir con clases personalizadas.
+-   Mantén cada componente desacoplado y reutilizable.
+
+---
+
+## Compilación
+
+Ejecuta `ng build` para construir la librería. Los artefactos del build se almacenarán en el directorio `dist/`.

@@ -1,0 +1,15 @@
+{
+    "angular-components": {
+        "form": {
+            "button": {
+                "cancel": "Cancelar",
+                "save": "Guardar"
+            },
+            "message": {
+                "check-fields": "Por favor, complete o verifique los campos requeridos",
+                "has-no-changes": "No se han realizado cambios",
+                "required-field": "Campo obligatorio"
+            }
+        }
+    }
+}

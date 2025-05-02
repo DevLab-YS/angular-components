@@ -5,6 +5,9 @@
         </p>
 
         @switch (component) {
+            @case ('form') {
+                <ys-form-section></ys-form-section>
+            }
             @case ('header') {
                 <ys-header-section></ys-header-section>
             }

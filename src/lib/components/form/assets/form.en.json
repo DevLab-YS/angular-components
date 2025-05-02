@@ -10,11 +10,6 @@
                 "has-no-changes": "No changes have been made",
                 "required-field": "Required field"
             }
-        },
-        "table": {
-            "no-content": {
-                "label": "There are no rows to display"
-            }
         }
     }
 }

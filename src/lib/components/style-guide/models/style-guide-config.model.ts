@@ -2,5 +2,6 @@ export enum StyleGuideComponentType {
     Header = 'header',
     List = 'list',
     Table = 'table',
-    Tree = 'tree'
+    Tree = 'tree',
+    Form = 'form'
 }

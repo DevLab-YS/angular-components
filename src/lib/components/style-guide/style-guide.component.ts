@@ -17,7 +17,8 @@ export class StyleGuideComponent {
         StyleGuideComponentType.Header,
         StyleGuideComponentType.Table,
         StyleGuideComponentType.List,
-        StyleGuideComponentType.Tree
+        StyleGuideComponentType.Tree,
+        StyleGuideComponentType.Form
     ];
 
     translationPrefix = LIBRARY_CONSTANTS.TRANSLATIONS_PREFIX;
