@@ -1,59 +1,67 @@
-const fs = require('fs');
+/**
+ * Tailwind safelist generator + HTML builder
+ *
+ * - Scans ../src/lib for classes that start with "tw-".
+ * - Saves the list in ../output/tailwind-safelist.json
+ * - Creates (or overwrites) ../dist/src/css/demo-safelist.html containing:
+ *      <p class="class1 class2 class3 …"></p>
+ */
+
+const fs   = require('fs');
 const path = require('path');
 
-const baseDir = path.resolve(__dirname, '../src/lib');
-const outputFile = path.resolve(__dirname, '../output/tailwind-safelist.json');
-const validExtensions = ['.html', '.ts'];
+/* ==========  Settings  ========== */
+const baseDir        = path.resolve(__dirname, '../src/lib');
+const jsonOutputFile = path.resolve(__dirname, '../output/tailwind-safelist.json');
+const htmlOutputFile = path.resolve(__dirname, '../dist/src/lib/assets/css/demo-safelist.html');
+const validExt       = ['.html', '.ts'];   // file extensions to inspect
+/* ================================= */
 
+/* Recursively collect files with valid extensions */
 function findFilesRecursively(dir) {
-    let results = [];
-    if (!fs.existsSync(dir)) return results;
-
-    const entries = fs.readdirSync(dir);
-    for (const entry of entries) {
-        const fullPath = path.join(dir, entry);
-        const stat = fs.statSync(fullPath);
-
-        if (stat.isDirectory()) {
-            results = results.concat(findFilesRecursively(fullPath));
-        } else if (validExtensions.includes(path.extname(fullPath))) {
-            results.push(fullPath);
-        }
-    }
-
-    return results;
+    if (!fs.existsSync(dir)) return [];
+    return fs.readdirSync(dir).flatMap(entry => {
+        const full = path.join(dir, entry);
+        return fs.statSync(full).isDirectory()
+            ? findFilesRecursively(full)
+            : validExt.includes(path.extname(full)) ? [full] : [];
+    });
 }
 
+/* Extract Tailwind classes that begin with "tw-" */
 function extractTailwindClasses(content) {
     const matches = content.match(/[\"']?tw-[-\w:/\\.%]+(?=["'\s])/g) || [];
-
-    const sanitizeClassName = className => {
-        return className
-            .replace(/^["']?tw-/, '') // Remove leading quote and 'tw-'
-            .replace(/["']$/, '') // Remove trailing quote
-            .replace(/--+/g, '-') // Replace double dashes
-            .replace(/^-+|-+$/g, ''); // Trim leading/trailing dashes
-    };
-
-    return matches.map(sanitizeClassName);
+    return matches.map(cls =>
+        cls
+            .replace(/^["']?tw-/, '')   // strip leading quote and "tw-"
+            .replace(/["']$/, '')       // strip trailing quote
+            .replace(/--+/g, '-')       // collapse double dashes
+            .replace(/^-+|-+$/g, '')    // trim dashes at both ends
+    );
 }
 
-function getAllTailwindClassesFromDir(directory) {
-    const files = findFilesRecursively(directory);
-    const classSet = new Set();
-
-    for (const file of files) {
-        const content = fs.readFileSync(file, 'utf-8');
-        const classes = extractTailwindClasses(content);
-        classes.forEach(cls => classSet.add(cls));
-    }
-
-    return Array.from(classSet).sort();
+/* Build a sorted unique list of all Tailwind classes in baseDir */
+function getAllTailwindClasses() {
+    const files = findFilesRecursively(baseDir);
+    const set   = new Set();
+    files.forEach(file =>
+        extractTailwindClasses(fs.readFileSync(file, 'utf8')).forEach(c => set.add(c))
+    );
+    return [...set].sort();
 }
 
-const classes = getAllTailwindClassesFromDir(baseDir);
-fs.writeFileSync(outputFile, JSON.stringify(classes, null), 'utf-8');
+/* ----------  RUN  ---------- */
+const classes = getAllTailwindClasses();
 
-console.log(`✅ Safelist generated and saved to ${outputFile}`);
-console.log('\nPaste this in your tailwind.config.js:\n');
-console.log(`safelist: ${JSON.stringify(classes, null, 4)},`);
+/* 1) Write JSON safelist */
+fs.mkdirSync(path.dirname(jsonOutputFile), { recursive: true });
+fs.writeFileSync(jsonOutputFile, JSON.stringify(classes, null, 2), 'utf8');
+
+/* 2) Write HTML demo with <p class="…"> */
+const htmlContent = `<p class="${classes.join(' ')}"></p>`;
+fs.mkdirSync(path.dirname(htmlOutputFile), { recursive: true });
+fs.writeFileSync(htmlOutputFile, htmlContent, 'utf8');
+
+/* 3) Console logs */
+console.log(`Safelist JSON generated at:  ${jsonOutputFile}`);
+console.log(`Demo HTML generated at:      ${htmlOutputFile}\n`);

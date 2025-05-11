@@ -1,10 +1,10 @@
-# TreeComponent – Configuración y uso
+# TreeComponent – Configuration and Usage
 
-El `TreeComponent` es un componente diseñado para representar estructuras jerárquicas de nodos, similar a un árbol. Permite configurar múltiples niveles de nodos, definir contenido asociado a cada uno, tooltips y controlar si se deben traducir o mostrar los hijos de cada nodo.
+`TreeComponent` is designed to display hierarchical data as a tree. You can define multiple node levels, attach custom content and tooltips, decide whether labels/tooltips should be translated and control the visibility of each node’s children.
 
 ---
 
-## Ejemplo de uso básico
+## Basic usage example
 
 ```ts
 import { TreeConfig, TreeNode } from './models/tree-config.model';
@@ -13,14 +13,21 @@ this.treeConfig = new TreeConfig({
     prefix: 'categories.tree',
     nodes: [
         new TreeNode({
-            label: 'Electrónica',
-            tooltip: 'Categoría de productos electrónicos',
-            children: [new TreeNode({ label: 'Teléfonos' }), new TreeNode({ label: 'Portátiles' })]
+            label: 'Electronics',
+            tooltip: 'Electronic-products category',
+            children: [
+                new TreeNode({ label: 'Phones' }),
+                new TreeNode({ label: 'Laptops' })
+            ]
         }),
-        new TreeNode({ label: 'clothes', tooltip: 'categories.tree.clothes.tooltip', translate: true })
+        new TreeNode({
+            label: 'clothes',
+            tooltip: 'categories.tree.clothes.tooltip',
+            translate: true   // label + tooltip will be run through ngx-translate
+        })
     ],
     clickNode: node => {
-        console.log('Nodo clicado:', node.label);
+        console.log('Clicked node:', node.label);
     }
 });
 ```
@@ -29,56 +36,52 @@ this.treeConfig = new TreeConfig({
 
 ## TreeConfig
 
-Clase que representa la configuración del árbol.
+Represents the overall tree configuration.
 
-### Propiedades
-
-| Propiedad   | Tipo                           | Requerido | Descripción                                      |
-| ----------- | ------------------------------ | --------- | ------------------------------------------------ |
-| `prefix`    | `string`                       | ✅        | Prefijo para las claves de traducción.           |
-| `nodes`     | `TreeNode[]`                   | ✅        | Array de nodos raíz del árbol.                   |
-| `clickNode` | `(treeNode: TreeNode) => void` | ❌        | Función que se ejecuta al hacer clic en un nodo. |
+| Property    | Type                           | Required | Description                            |
+| ----------- | ------------------------------ | -------- | -------------------------------------- |
+| `prefix`    | `string`                       | ✅        | Translation-key prefix.                |
+| `nodes`     | `TreeNode[]`                   | ✅        | Array of root-level nodes.             |
+| `clickNode` | `(treeNode: TreeNode) => void` | ❌        | Callback fired when a node is clicked. |
 
 ---
 
 ## TreeNode
 
-Representa un nodo individual del árbol.
+Represents an individual node.
 
-### Propiedades
-
-| Propiedad      | Tipo         | Requerido | Descripción                                                                |
-| -------------- | ------------ | --------- | -------------------------------------------------------------------------- |
-| `label`        | `string`     | ✅        | Texto que se muestra como título del nodo.                                 |
-| `content`      | `unknown`    | ❌        | Contenido adicional asociado al nodo.                                      |
-| `showChildren` | `boolean`    | ❌        | Indica si los hijos del nodo deben mostrarse (por defecto `false`).        |
-| `children`     | `TreeNode[]` | ❌        | Lista de nodos hijos (por defecto lista vacía).                            |
-| `translate`    | `boolean`    | ❌        | Indica si la etiqueta y tooltip debe ser traducidos (por defecto `false`). |
-| `tooltip`      | `string`     | ❌        | Tooltip opcional que se muestra al pasar el cursor sobre el nodo.          |
+| Property       | Type         | Required | Description                                                          |
+| -------------- | ------------ | -------- | -------------------------------------------------------------------- |
+| `label`        | `string`     | ✅        | Text displayed as the node title.                                    |
+| `content`      | `unknown`    | ❌        | Extra data associated with the node.                                 |
+| `showChildren` | `boolean`    | ❌        | Whether the node’s children are visible (default `false`).           |
+| `children`     | `TreeNode[]` | ❌        | Array of child nodes (defaults to an empty array).                   |
+| `translate`    | `boolean`    | ❌        | Translate `label` and `tooltip` via ngx-translate (default `false`). |
+| `tooltip`      | `string`     | ❌        | Optional tooltip shown on hover.                                     |
 
 ---
 
-## Ejemplo de claves de traducción
+## Translation-key example
 
-Si se usa `ngx-translate`, puedes usar el `prefix` para definir las claves de traducción de los nodos:
+When using **ngx-translate**, build your keys from the `prefix` plus the node labels:
 
 ```json
 {
-    "categories": {
-        "tree": {
-            "clothes": {
-                "label": "Ropa",
-                "tooltip": "Categoría ropa"
-            }
-        }
+  "categories": {
+    "tree": {
+      "clothes": {
+        "label": "Clothes",
+        "tooltip": "Clothing category"
+      }
     }
+  }
 }
 ```
 
 ---
 
-## Recomendaciones
+## Recommendations
 
--   Usa el `prefix` para mantener organizada la internacionalización de los nodos.
--   Utiliza `clickNode` para manejar eventos interactivos como selección, navegación o edición.
--   Puedes anidar nodos hasta el nivel de profundidad que necesites, gracias a la propiedad `children`.
+* Use a meaningful `prefix` to keep node translations organised.
+* Handle interactive behaviour (selection, navigation, editing) in the `clickNode` callback.
+* Nest as many levels as you need—the `children` property supports unlimited depth.

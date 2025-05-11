@@ -1,29 +1,34 @@
-# TableComponent – Configuración y uso
+# TableComponent – Configuration and Usage
 
-El `TableComponent` es un componente flexible para mostrar tablas dinámicas. Permite configurar columnas, filas, selección de elementos, carga de celdas personalizadas y recarga mediante eventos.
+`TableComponent` is a flexible component for displaying dynamic tables. It lets you configure columns and rows, enable row-selection, load custom cells and trigger manual reloads via events.
 
 ---
 
-## Ejemplo de uso básico
+## Basic usage example
 
 ```ts
-import { LinkTableCell, TableConfig, TableColumn, TextTableCell } from '@yirmelsanchez/angular-components';
+import {
+    LinkTableCell,
+    TableConfig,
+    TableColumn,
+    TextTableCell
+} from '@yirmelsanchez/angular-components';
 
 this.tableConfig = new TableConfig({
     prefix: 'users.table',
     columns: [
-        new TableColumn({ key: 'name', width: 30 }),
-        new TableColumn({ key: 'email', width: 50 }),
+        new TableColumn({ key: 'name',   width: 30 }),
+        new TableColumn({ key: 'email',  width: 50 }),
         new TableColumn({ key: 'actions', width: 20 })
     ],
-    items: this.users, // array de objetos
+    items: this.users, // array of objects
     loadCells: item => [
         new TextTableCell({ content: item.name }),
         new TextTableCell({ content: item.email }),
         new LinkTableCell({ content: 'Edit', action: () => this.editUser(item) })
     ],
     selectedItemsChange: (items, indexes) => {
-        console.log('Seleccionados:', items, indexes);
+        console.log('Selected:', items, indexes);
     },
     $loadTable: new EventEmitter<void>()
 });
@@ -33,135 +38,127 @@ this.tableConfig = new TableConfig({
 
 ## TableConfig
 
-Clase que representa la configuración de la tabla.
+Represents the table configuration.
 
-### Propiedades
+### Properties
 
-| Propiedad             | Tipo                        | Requerido | Descripción                                                       |
-| --------------------- | --------------------------- | --------- | ----------------------------------------------------------------- |
-| `prefix`              | `string`                    | ✅        | Prefijo para las claves de traducción.                            |
-| `height`              | `string`                    | ❌        | Altura de la tabla (por defecto `'60vh'`).                        |
-| `selectable`          | `boolean`                   | ❌        | Permite seleccionar filas (por defecto `true`).                   |
-| `showTooltip`         | `boolean`                   | ❌        | Muestra tooltips en celdas si aplica (por defecto `false`).       |
-| `items`               | `Record<string, unknown>[]` | ❌        | Lista de objetos que representan los datos de las filas.          |
-| `columns`             | `TableColumn[]`             | ✅        | Configuración de las columnas de la tabla.                        |
-| `loadCells`           | `(item) => TableCell[]`     | ✅        | Función que mapea cada item a un array de celdas (`TableCell[]`). |
-| `selectedItemsChange` | `(items, indexes) => void`  | ❌        | Callback que se dispara cuando cambia la selección de filas.      |
-| `$loadTable`          | `EventEmitter<void>`        | ✅        | Evento para recargar la tabla desde el exterior.                  |
+| Property              | Type                        | Required | Description                                              |
+| --------------------- | --------------------------- | -------- | -------------------------------------------------------- |
+| `prefix`              | `string`                    | ✅        | Translation-key prefix.                                  |
+| `height`              | `string`                    | ❌        | Table height (default `'60vh'`).                         |
+| `selectable`          | `boolean`                   | ❌        | Enables row selection (default `true`).                  |
+| `showTooltip`         | `boolean`                   | ❌        | Shows tooltips in cells when provided (default `false`). |
+| `items`               | `Record<string, unknown>[]` | ❌        | List of objects that populate the rows.                  |
+| `columns`             | `TableColumn[]`             | ✅        | Column definitions.                                      |
+| `loadCells`           | `(item) => TableCell[]`     | ✅        | Maps each item to an array of cells (`TableCell[]`).     |
+| `selectedItemsChange` | `(items, indexes) => void`  | ❌        | Callback fired whenever the row selection changes.       |
+| `$loadTable`          | `EventEmitter<void>`        | ✅        | Event used to reload the table from the outside.         |
 
 ---
 
 ## TableColumn
 
-Define una columna de la tabla.
+Defines a table column.
 
-### Propiedades
+### Properties
 
-| Propiedad | Tipo     | Requerido | Descripción                                 |
-| --------- | -------- | --------- | ------------------------------------------- |
-| `key`     | `string` | ✅        | Clave única para identificar la columna.    |
-| `width`   | `number` | ❌        | Ancho de la columna (porcentaje o píxeles). |
+| Property | Type     | Required | Description                            |
+| -------- | -------- | -------- | -------------------------------------- |
+| `key`    | `string` | ✅        | Unique key that identifies the column. |
+| `width`  | `number` | ❌        | Column width (percentage or pixels).   |
 
 ---
 
 ## TableRow
 
-Representa una fila de la tabla.
+Represents a table row.
 
-### Propiedades
+### Properties
 
-| Propiedad  | Tipo                      | Requerido | Descripción                                                |
-| ---------- | ------------------------- | --------- | ---------------------------------------------------------- |
-| `cells`    | `TableCell[]`             | ✅        | Array de celdas que contiene la fila.                      |
-| `selected` | `boolean`                 | ❌        | Indica si la fila está seleccionada (por defecto `false`). |
-| `content`  | `Record<string, unknown>` | ✅        | Datos originales asociados a la fila.                      |
+| Property   | Type                      | Required | Description                                    |
+| ---------- | ------------------------- | -------- | ---------------------------------------------- |
+| `cells`    | `TableCell[]`             | ✅        | Array of cells contained in the row.           |
+| `selected` | `boolean`                 | ❌        | Whether the row is selected (default `false`). |
+| `content`  | `Record<string, unknown>` | ✅        | Original data object associated with the row.  |
 
 ---
 
 ## TableCell
 
-Clase base para representar el contenido de una celda.
+Base class describing a cell’s content.
 
-### Propiedades
+### Properties
 
-| Propiedad   | Tipo       | Requerido | Descripción                                                      |
-| ----------- | ---------- | --------- | ---------------------------------------------------------------- |
-| `content`   | `unknown`  | ✅        | Contenido de la celda.                                           |
-| `tooltip`   | `string`   | ❌        | Tooltip opcional para la celda.                                  |
-| `type`      | `CellType` | ✅        | Tipo de celda (`text` o `link`).                                 |
-| `translate` | `boolean`  | ❌        | Indica si el contenido debe ser traducido (por defecto `false`). |
+| Property    | Type       | Required | Description                                                 |
+| ----------- | ---------- | -------- | ----------------------------------------------------------- |
+| `content`   | `unknown`  | ✅        | Cell content.                                               |
+| `tooltip`   | `string`   | ❌        | Optional tooltip for the cell.                              |
+| `type`      | `CellType` | ✅        | Cell type (`text` or `link`).                               |
+| `translate` | `boolean`  | ❌        | Whether the content should be translated (default `false`). |
 
 ---
 
 ## CellType
 
-Enum que define el tipo de celda.
+Enum describing cell types.
 
-| Valor  | Descripción                   |
-| ------ | ----------------------------- |
-| `text` | Celda de texto plano.         |
-| `link` | Celda con un enlace o acción. |
-
----
-
-## Tipos de celdas
-
--   **TextTableCell**:  
-    Representa una celda de solo texto.
-
-    ```ts
-    constructor({ tooltip?, content, translate = false })
-    ```
-
--   **LinkTableCell**:  
-    Representa una celda con un enlace que dispara una acción al hacer clic.
-
-    ```ts
-    constructor({ tooltip?, content, action, translate = false })
-    ```
+| Value  | Description                       |
+| ------ | --------------------------------- |
+| `text` | Plain-text cell.                  |
+| `link` | Cell containing a link or action. |
 
 ---
 
-## Recarga manual de la tabla
+## Cell classes
 
-Para recargar los datos de la tabla desde el exterior, se emite el evento `$loadTable`:
+* **TextTableCell**
+  Plain text cell.
+
+  ```ts
+  constructor({ tooltip?, content, translate = false })
+  ```
+
+* **LinkTableCell**
+  Cell that renders a link and triggers an action on click.
+
+  ```ts
+  constructor({ tooltip?, content, action, translate = false })
+  ```
+
+---
+
+## Manually reloading the table
+
+Emit the `$loadTable` event to reload the data from outside the component:
 
 ```ts
 this.tableConfig.$loadTable.emit();
 ```
 
-Esto volverá a ejecutar `loadCells` sobre los `items` actuales.
+This re-executes `loadCells` over the current `items`.
 
 ---
 
-## Internacionalización
+## Internationalisation
 
-La tabla puede utilizar `ngx-translate` para traducir los encabezados y tooltips de las celdas, usando el `prefix` como base de las claves de traducción.
-
-Ejemplo de claves:
+Use **ngx-translate** to translate headers and cell tooltips. Keys are based on `prefix`.
 
 ```json
 {
-    "users": {
-        "table": {
-            "name": {
-                "label": "Nombre"
-            },
-            "email": {
-                "label": "Correo Electrónico"
-            },
-            "actions": {
-                "label": "Acciones"
-            }
-        }
+  "users": {
+    "table": {
+      "name":    { "label": "Name" },
+      "email":   { "label": "Email" },
+      "actions": { "label": "Actions" }
     }
+  }
 }
 ```
 
 ---
 
-## Recomendaciones
+## Recommendations
 
--   Define claves únicas en las columnas (`key`) para evitar conflictos.
--   Usa `selectedItemsChange` para manejar los elementos seleccionados de forma reactiva.
--   Aprovecha `$loadTable.emit()` cuando quieras refrescar los datos sin necesidad de recrear la tabla.
+* Ensure every column has a **unique `key`** to avoid conflicts.
+* Use `selectedItemsChange` to reactively handle selected rows.
+* Call `$loadTable.emit()` whenever you need to refresh the data without recreating the table.

@@ -11,6 +11,104 @@
                 "required-field": "Required field"
             }
         },
+        "style-guide": {
+            "component": {
+                "form": "Form",
+                "header": "Header",
+                "list": "List",
+                "table": "Table",
+                "tree": "Tree"
+            },
+            "error": {
+                "component-not-found": "Component not found"
+            },
+            "section": {
+                "form": {
+                    "form": {
+                        "general": {
+                            "address": {
+                                "label": "Address",
+                                "placeholder": "Type an Address"
+                            },
+                            "category": {
+                                "label": "Category",
+                                "option": {
+                                    "fast-food": "Fast Food",
+                                    "other": "Other",
+                                    "traditional": "Traditional"
+                                },
+                                "placeholder": "Select a Category"
+                            },
+                            "label": "General",
+                            "name": {
+                                "label": "Name",
+                                "placeholder": "Type a Name"
+                            },
+                            "role": {
+                                "label": "Role",
+                                "placeholder": "Type a Role"
+                            },
+                            "tooltip": "General section",
+                            "type": {
+                                "label": "Type",
+                                "option": {
+                                    "client": "Client",
+                                    "restaurant": "Restaurant"
+                                },
+                                "placeholder": "Select a Type"
+                            }
+                        },
+                        "header": {
+                            "new-user": "New User"
+                        }
+                    }
+                },
+                "header": {
+                    "header": {
+                        "delete": {
+                            "label": "Delete"
+                        },
+                        "edit": {
+                            "label": "Edit"
+                        },
+                        "filters": {
+                            "label": "Filters"
+                        },
+                        "new": {
+                            "label": "New"
+                        }
+                    }
+                },
+                "list": {
+                    "list": {
+                        "card": {
+                            "label": "Cards",
+                            "tooltip": "Card items"
+                        },
+                        "text": {
+                            "label": "Texts",
+                            "tooltip": "Text items"
+                        }
+                    }
+                },
+                "table": {
+                    "table": {
+                        "name": {
+                            "label": "Name"
+                        },
+                        "path": {
+                            "label": "Path"
+                        }
+                    },
+                    "title": {
+                        "empty": "Empty",
+                        "selectable": "Selectable",
+                        "unselectable": "Unselectable"
+                    }
+                }
+            },
+            "title": "Style Guide"
+        },
         "table": {
             "no-content": {
                 "label": "There are no rows to display"

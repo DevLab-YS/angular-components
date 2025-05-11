@@ -1,13 +1,17 @@
-# HeaderComponent – Configuración y uso
+# HeaderComponent – Configuration and Usage
 
-El `HeaderComponent` es un componente flexible y configurable que permite definir acciones a izquierda y derecha, mostrar iconos, etiquetas y tooltips, todo a través de una instancia de la clase `HeaderConfig`.
+`HeaderComponent` is a flexible, highly-configurable component that lets you define left- and right-aligned actions, show icons, labels and tooltips—everything driven by a `HeaderConfig` instance.
 
 ---
 
-## Ejemplo de uso básico
+## Basic usage example
 
 ```ts
-import { HeaderConfig, HeaderAction, HeaderActionType } from '@yirmelsanchez/angular-components';
+import {
+    HeaderConfig,
+    HeaderAction,
+    HeaderActionType
+} from '@yirmelsanchez/angular-components';
 
 this.headerConfig = new HeaderConfig({
     prefix: 'dashboard.header',
@@ -35,77 +39,77 @@ this.headerConfig = new HeaderConfig({
 
 ## HeaderConfig
 
-Clase que representa la configuración del encabezado.
+Represents the header’s overall configuration.
 
-### Propiedades
+### Properties
 
-| Propiedad      | Tipo             | Descripción                                 |
-| -------------- | ---------------- | ------------------------------------------- |
-| `prefix`       | `string`         | Prefijo para las claves de traducción.      |
-| `leftActions`  | `HeaderAction[]` | Lista de acciones alineadas a la izquierda. |
-| `rightActions` | `HeaderAction[]` | Lista de acciones alineadas a la derecha.   |
+| Property       | Type             | Description                                    |
+| -------------- | ---------------- | ---------------------------------------------- |
+| `prefix`       | `string`         | Translation-key prefix.                        |
+| `leftActions`  | `HeaderAction[]` | List of actions aligned to the **left** side.  |
+| `rightActions` | `HeaderAction[]` | List of actions aligned to the **right** side. |
 
 ---
 
 ## HeaderAction
 
-Define una acción en el encabezado.
+Defines a single header action.
 
-### Propiedades
+### Properties
 
-| Propiedad     | Tipo               | Requerido | Descripción                                                    |
-| ------------- | ------------------ | --------- | -------------------------------------------------------------- |
-| `key`         | `string`           | ✅        | Clave de identificación y traducción (usada con `prefix`).     |
-| `type`        | `HeaderActionType` | ❌        | Tipo de acción: botón primario, secundario o texto.            |
-| `icon`        | `IconDefinition`   | ❌        | Icono de FontAwesome opcional.                                 |
-| `action`      | `() => void`       | ✅        | Función a ejecutar cuando se activa la acción.                 |
-| `showLabel`   | `boolean`          | ❌        | Muestra o no el texto de la acción (por defecto: `true`).      |
-| `showTooltip` | `boolean`          | ❌        | Muestra o no tooltip al pasar el cursor (por defecto: `true`). |
+| Property      | Type               | Required | Description                                                   |
+| ------------- | ------------------ | -------- | ------------------------------------------------------------- |
+| `key`         | `string`           | ✅        | Identifier / translation key (combined with `prefix`).        |
+| `type`        | `HeaderActionType` | ❌        | Action style: primary button, secondary button or plain text. |
+| `icon`        | `IconDefinition`   | ❌        | Optional FontAwesome icon.                                    |
+| `action`      | `() => void`       | ✅        | Callback executed when the action is triggered.               |
+| `showLabel`   | `boolean`          | ❌        | Whether to display the action’s text. Default is `true`.      |
+| `showTooltip` | `boolean`          | ❌        | Whether to show a tooltip on hover. Default is `true`.        |
 
 ---
 
 ## HeaderActionType
 
-| Valor             | Descripción                      |
-| ----------------- | -------------------------------- |
-| `PrimaryButton`   | Estilo de botón principal        |
-| `SecondaryButton` | Estilo de botón secundario       |
-| `Text`            | Acción con estilo de texto plano |
+| Value             | Description            |
+| ----------------- | ---------------------- |
+| `PrimaryButton`   | Primary button style   |
+| `SecondaryButton` | Secondary button style |
+| `Text`            | Plain-text action      |
 
 ---
 
-## Internacionalización
+## Internationalisation
 
-El componente usa `ngx-translate` para mostrar etiquetas y tooltips. Las claves se generan con el formato:
+The component relies on **ngx-translate**. Keys follow this pattern:
 
 ```
 <prefix>.<key>.label
 <prefix>.<key>.tooltip
 ```
 
-Ejemplo:
+Example:
 
 ```json
 {
-    "dashboard": {
-        "header": {
-            "back": {
-                "label": "Volver",
-                "tooltip": "Ir a la pantalla anterior"
-            },
-            "save": {
-                "label": "Guardar",
-                "tooltip": "Guardar los cambios"
-            }
-        }
+  "dashboard": {
+    "header": {
+      "back": {
+        "label": "Back",
+        "tooltip": "Go to the previous screen"
+      },
+      "save": {
+        "label": "Save",
+        "tooltip": "Save changes"
+      }
     }
+  }
 }
 ```
 
 ---
 
-## Recomendaciones
+## Recommendations
 
--   Las acciones deben tener claves únicas dentro del header.
--   Usa `showLabel` en `false` si solo querés mostrar el icono.
--   El `prefix` permite organizar mejor las traducciones por módulo o sección.
+* Each action must have a unique key within the header.
+* Set `showLabel` to `false` if you want to display only the icon.
+* Use `prefix` to keep translation keys organised by module or feature.

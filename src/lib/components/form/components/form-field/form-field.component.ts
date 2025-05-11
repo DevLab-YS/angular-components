@@ -21,7 +21,7 @@ export class FormFieldComponent {
 
     getClasses(): string {
         const common =
-            'tw-w-full tw-px-3 tw-py-2 tw-h-[44px] tw-border-2 tw-rounded-md tw-bg-background-secondary tw-border-text-secondaryInverse hover:tw-border-primaryInverse focus:tw-border-primaryColor focus:tw-outline-none focus:tw-ring-0 tw-text-text-primary placeholder:tw-text-text-secondary/50 tw-transition-all tw-duration-200 tw-ease-in-out disabled:tw-bg-background-tertiary';
+            'tw-w-full tw-px-3 tw-py-2 tw-h-[44px] tw-border tw-rounded-sm tw-bg-background-secondary tw-border-text-secondaryInverse hover:tw-border-primaryInverse focus:tw-border-primaryColor focus:tw-outline-none focus:tw-ring-0 tw-text-text-primary placeholder:tw-text-text-secondary/50 tw-transition-all tw-duration-200 tw-ease-in-out disabled:tw-bg-background-tertiary';
 
         return common;
     }

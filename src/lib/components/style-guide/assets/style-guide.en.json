@@ -45,7 +45,7 @@
                                     "restaurant": "Restaurant"
                                 },
                                 "placeholder": "Select a Type"
-                            },
+                            }
                         },
                         "header": {
                             "new-user": "New User"

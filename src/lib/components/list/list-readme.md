@@ -1,13 +1,18 @@
-# ListComponent – Configuración y uso
+# ListComponent – Configuration and Usage
 
-El `ListComponent` es un componente flexible para mostrar listas dinámicas y configurables. Permite configurar secciones, elementos de lista, acciones personalizadas y la visibilidad de las secciones.
+`ListComponent` is a flexible component for displaying dynamic, highly-configurable lists. It lets you define sections, list items, custom actions and control the visibility of each section.
 
 ---
 
-## Ejemplo de uso básico
+## Basic usage example
 
 ```ts
-import { ListConfig, ListSection, ListItem, ListItemType } from '@yirmelsanchez/angular-components';
+import {
+    ListConfig,
+    ListSection,
+    ListItem,
+    ListItemType
+} from '@yirmelsanchez/angular-components';
 
 this.listConfig = new ListConfig({
     prefix: 'items.list',
@@ -27,82 +32,80 @@ this.listConfig = new ListConfig({
 
 ## ListConfig
 
-Clase que representa la configuración de la lista.
+Represents the overall list configuration.
 
-### Propiedades
+### Properties
 
-| Propiedad  | Tipo            | Requerido | Descripción                                                |
-| ---------- | --------------- | --------- | ---------------------------------------------------------- |
-| `prefix`   | `string`        | ✅        | Prefijo para las claves de traducción.                     |
-| `sections` | `ListSection[]` | ✅        | Array de secciones que contiene los elementos de la lista. |
+| Property   | Type            | Required | Description                                 |
+| ---------- | --------------- | -------- | ------------------------------------------- |
+| `prefix`   | `string`        | ✅        | Translation-key prefix.                     |
+| `sections` | `ListSection[]` | ✅        | Array of sections that hold the list items. |
 
 ---
 
 ## ListSection
 
-Representa una sección dentro de la lista.
+Represents a section within the list.
 
-### Propiedades
+### Properties
 
-| Propiedad   | Tipo                       | Requerido | Descripción                                                                  |
-| ----------- | -------------------------- | --------- | ---------------------------------------------------------------------------- |
-| `key`       | `string`                   | ✅        | Clave única para identificar la sección.                                     |
-| `showTitle` | `boolean`                  | ❌        | Indica si la sección tiene un título (por defecto `true`).                   |
-| `showItems` | `boolean`                  | ❌        | Indica si los elementos de la sección se deben mostrar (por defecto `true`). |
-| `items`     | `ListItem[]`               | ✅        | Array de elementos dentro de la sección.                                     |
-| `action`    | `(item: ListItem) => void` | ❌        | Acción que se ejecuta cuando se interactúa con un elemento.                  |
+| Property    | Type                       | Required | Description                                                           |
+| ----------- | -------------------------- | -------- | --------------------------------------------------------------------- |
+| `key`       | `string`                   | ✅        | Unique key to identify the section.                                   |
+| `showTitle` | `boolean`                  | ❌        | Whether the section should display a title. Defaults to `true`.       |
+| `showItems` | `boolean`                  | ❌        | Whether the items in the section should be shown. Defaults to `true`. |
+| `items`     | `ListItem[]`               | ✅        | Array of items contained in the section.                              |
+| `action`    | `(item: ListItem) => void` | ❌        | Callback executed when an item is interacted with.                    |
 
 ---
 
 ## ListItem
 
-Representa un elemento dentro de una sección.
+Represents an item inside a section.
 
-### Propiedades
+### Properties
 
-| Propiedad | Tipo                      | Requerido | Descripción                              |
-| --------- | ------------------------- | --------- | ---------------------------------------- |
-| `title`   | `string`                  | ✅        | Título del elemento.                     |
-| `type`    | `ListItemType`            | ✅        | Tipo de elemento (`Card` o `Text`).      |
-| `tooltip` | `string`                  | ❌        | Tooltip opcional para el elemento.       |
-| `content` | `Record<string, unknown>` | ❌        | Datos adicionales asociados al elemento. |
+| Property  | Type                      | Required | Description                               |
+| --------- | ------------------------- | -------- | ----------------------------------------- |
+| `title`   | `string`                  | ✅        | Item title.                               |
+| `type`    | `ListItemType`            | ✅        | Item type (`Card` or `Text`).             |
+| `tooltip` | `string`                  | ❌        | Optional tooltip for the item.            |
+| `content` | `Record<string, unknown>` | ❌        | Additional data associated with the item. |
 
 ---
 
 ## ListItemType
 
-Enum que define los tipos de elementos de la lista.
+Enum defining the available item types.
 
-| Valor  | Descripción              |
-| ------ | ------------------------ |
-| `Card` | Elemento de tipo "card". |
-| `Text` | Elemento de tipo "text". |
+| Value  | Description      |
+| ------ | ---------------- |
+| `Card` | Card-style item. |
+| `Text` | Plain-text item. |
 
 ---
 
-## Ejemplo de claves de traducción
+## Translation key example
 
-Si se usa `ngx-translate` para la internacionalización, puedes usar el `prefix` como base para las claves de traducción.
-
-Ejemplo de claves:
+When using **ngx-translate** for i18n, `prefix` acts as the base for your keys.
 
 ```json
 {
-    "items": {
-        "list": {
-            "section1": {
-                "label": "Sección 1",
-                "tooltip": "Sección 1"
-            }
-        }
+  "items": {
+    "list": {
+      "section1": {
+        "label": "Section 1",
+        "tooltip": "Section 1"
+      }
     }
+  }
 }
 ```
 
 ---
 
-## Recomendaciones
+## Recommendations
 
--   Define claves únicas en las secciones y elementos para evitar conflictos.
--   Usa `clickHeader` para gestionar la visibilidad de las secciones de manera eficiente.
--   Aprovecha la flexibilidad de las clases en `getItemClasses` para personalizar los estilos de los elementos de la lista.
+* Give every section and item a **unique key** to avoid conflicts.
+* Use `clickHeader` (if exposed) to toggle section visibility efficiently.
+* Leverage the utility method `getItemClasses` to fine-tune item styles.

@@ -1,29 +1,34 @@
+/*
+ * Merge i18n JSON files for each language and write a single bundle per lang.
+ * ❗ Now aborts if any source JSON is invalid and prints the offending file.
+ */
+
 const fs = require('fs');
 const path = require('path');
 
 const sourceDirs = [path.resolve(__dirname, '../src/lib/components'), path.resolve(__dirname, '../src/lib/shared')];
 
 const targetDir = path.resolve(__dirname, '../src/lib/assets/i18n');
-
 const languages = ['en', 'es'];
 
+// ────────────────────────────────────────────────────────────────────────────
+// Helpers
+// ────────────────────────────────────────────────────────────────────────────
+
+/** Recursively collect files ending with a given extension. */
 function findFilesRecursively(dir, extension) {
-    let results = [];
-    if (!fs.existsSync(dir)) return results;
-    const files = fs.readdirSync(dir);
-    for (const file of files) {
-        const filePath = path.join(dir, file);
-        const stat = fs.statSync(filePath);
-        if (stat.isDirectory()) {
-            results = results.concat(findFilesRecursively(filePath, extension));
-        } else if (file.endsWith(extension)) {
-            results.push(filePath);
-        }
-    }
-    return results;
+    if (!fs.existsSync(dir)) return [];
+    return fs.readdirSync(dir).flatMap(entry => {
+        const full = path.join(dir, entry);
+        return fs.statSync(full).isDirectory()
+            ? findFilesRecursively(full, extension)
+            : entry.endsWith(extension)
+              ? [full]
+              : [];
+    });
 }
 
-// Deep merge
+/** Deep-merge `source` into `target` (objects only). */
 function deepMerge(target, source) {
     for (const key of Object.keys(source)) {
         if (source[key] instanceof Object && target[key] instanceof Object) {
@@ -35,33 +40,34 @@ function deepMerge(target, source) {
     return target;
 }
 
-// Merge translations
+// ────────────────────────────────────────────────────────────────────────────
+// Main
+// ────────────────────────────────────────────────────────────────────────────
+
 function mergeTranslations() {
-    if (!fs.existsSync(targetDir)) {
-        fs.mkdirSync(targetDir, { recursive: true });
-    }
+    fs.mkdirSync(targetDir, { recursive: true });
 
     languages.forEach(lang => {
         const extension = `.${lang}.json`;
 
-        let allFiles = [];
-        for (const dir of sourceDirs) {
-            allFiles = allFiles.concat(findFilesRecursively(dir, extension));
-        }
+        // Gather all JSON files for this language
+        const files = sourceDirs.flatMap(dir => findFilesRecursively(dir, extension));
 
-        const mergedTranslations = allFiles.reduce((acc, filePath) => {
+        // Merge them, validating each one
+        const merged = files.reduce((acc, filePath) => {
             try {
-                const content = JSON.parse(fs.readFileSync(filePath, 'utf-8'));
-                return deepMerge(acc, content);
-            } catch (e) {
-                console.warn(`Error parsing ${filePath}: ${e.message}`);
-                return acc;
+                const json = JSON.parse(fs.readFileSync(filePath, 'utf8'));
+                return deepMerge(acc, json);
+            } catch (err) {
+                console.error(`✖ Invalid JSON in: ${filePath}\n  ${err.message}`);
+                process.exit(1); // stop immediately
             }
         }, {});
 
-        const targetFilePath = path.join(targetDir, `angular-components.${lang}.json`);
-        fs.writeFileSync(targetFilePath, JSON.stringify(mergedTranslations, null, 4), 'utf-8');
-        console.log(`Merged translations for ${lang} saved to ${targetFilePath}`);
+        // Write output
+        const outFile = path.join(targetDir, `angular-components.${lang}.json`);
+        fs.writeFileSync(outFile, JSON.stringify(merged, null, 4), 'utf8');
+        console.log(`✔ Merged translations for ${lang} → ${outFile}`);
     });
 }
 
