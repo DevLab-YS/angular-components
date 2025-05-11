@@ -1,6 +1,6 @@
 {
-    "name": "@yirmelsanchez/angular-components",
-    "version": "0.0.5",
+    "name": "@devlab-ys/angular-components",
+    "version": "0.0.6",
     "publishConfig": {
         "registry": "https://npm.pkg.github.com/"
     },
