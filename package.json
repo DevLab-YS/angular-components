@@ -1,5 +1,5 @@
 {
-    "name": "@yirmelsanchez/angular-components",
+    "name": "@devlab-ys/angular-components",
     "version": "0.0.7-development",
     "publishConfig": {
         "registry": "https://npm.pkg.github.com/"
@@ -76,6 +76,7 @@
         "karma-jasmine-html-reporter": "^2.1.0",
         "ng-packagr": "18.2.1",
         "prettier": "3.3.3",
+        "puppeteer": "^24.8.2",
         "typescript": "5.5.4"
     },
     "private": false,
