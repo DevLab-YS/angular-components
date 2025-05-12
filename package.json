@@ -13,8 +13,8 @@
         "merge-translations": "node scripts/merge-translations.js",
         "postbuild": "npm run extract-tw-classes",
         "prebuild": "npm run merge-translations",
-        "test": "ng test --browsers ChromeHeadless --watch=false",
-        "test:watch": "ng test --watch",
+        "test": "ng test --browsers ChromeHeadlessNoSandbox --watch=false",
+        "test:watch": "ng test --browsers ChromeDebugging --watch --source-map",
         "update-translations": "npm run merge-translations && node scripts/update-translations.js"
     },
     "peerDependencies": {

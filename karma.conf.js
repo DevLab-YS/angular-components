@@ -1,10 +1,6 @@
-// Karma configuration file, see link for more information
-// https://karma-runner.github.io/1.0/config/configuration-file.html
-
 process.env.CHROME_BIN = require('puppeteer').executablePath();
-const { single } = require('rxjs');
 
-module.exports = function (config) {
+module.exports = config => {
     config.set({
         basePath: '',
         frameworks: ['jasmine', '@angular-devkit/build-angular'],
@@ -16,24 +12,27 @@ module.exports = function (config) {
             require('@angular-devkit/build-angular/plugins/karma')
         ],
         client: {
-            jasmine: {
-                // you can add configuration options for Jasmine here
-                // the possible options are listed at https://jasmine.github.io/api/edge/Configuration.html
-                // for example, you can disable the random execution with `random: false`
-                // or set a specific seed with `seed: 4321`
-            },
-            clearContext: false // leave Jasmine Spec Runner output visible in browser
+            jasmine: {},
+            clearContext: false
         },
         customLaunchers: {
-            chromeDebugging: {
+            ChromeHeadlessNoSandbox: {
+                base: 'ChromeHeadless',
+                flags: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-gpu', '--disable-dev-shm-usage']
+            },
+            ChromeDebugging: {
                 base: 'Chrome',
                 flags: ['--remote-debugging-port=9333']
             },
-            chromeNoSandbox: {
+            ChromeNoSandbox: {
                 base: 'Chrome',
                 flags: ['--no-sandbox', '--disable-web-security']
             }
         },
+        browsers: ['ChromeHeadlessNoSandbox'],
+        autoWatch: false,
+        singleRun: true,
+        restartOnFileChange: true,
         coverageReporter: {
             dir: require('path').join(__dirname, '../coverage'),
             subdir: '.',
@@ -42,10 +41,6 @@ module.exports = function (config) {
         reporters: ['progress', 'kjhtml'],
         port: 9876,
         colors: true,
-        logLevel: config.LOG_INFO,
-        autoWatch: true,
-        browsers: ['Chrome'],
-        singleRun: false,
-        restartOnFileChange: true
+        logLevel: config.LOG_INFO
     });
 };
