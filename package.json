@@ -1,6 +1,6 @@
 {
     "name": "@devlab-ys/angular-components",
-    "version": "0.0.7-development",
+    "version": "0.0.8-development",
     "publishConfig": {
         "registry": "https://npm.pkg.github.com/"
     },
